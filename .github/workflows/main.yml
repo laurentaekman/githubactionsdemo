@@ -23,9 +23,25 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: gradle build
+        run: gradle build
+
+      - name: docker version
+        run: |
+          docker -v
+          docker
+          docker images -a
+
+      - name: docker build
+        run: |
+          docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin2.0
+          docker images -a
+
+      - name: docker login
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: docker image push
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin2.0
 
       - name: running a custom script
         run: |
@@ -66,26 +82,3 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-
-      - name: check java version
-        run: java -version
-
-      - name: gradle build
-        run: gradle build
-
-      - name: docker version
-        run: |
-          docker -v
-          docker
-          docker images -a
-
-      - name: docker build
-        run: |
-          docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin2.0
-          docker images -a
-
-      - name: docker login
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: docker image push
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin2.0
