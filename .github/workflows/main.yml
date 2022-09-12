@@ -50,6 +50,9 @@ jobs:
       - run: |
           kubectl create namespace github-actions-demo
 
+      - run: |
+          kubectl apply - f pod.yaml
+
       # Runs a set of commands using the runners shell
       - name: Run AZ Command
         run: |
