@@ -32,7 +32,7 @@ jobs:
           ls -al
 
       - name: Log in with Azure Action
-        uses: azure/login@v1
+        uses: azure/actions/login@v1
         env:
           CREDENTIALS: "${{ secrets.AZURE_CREDENTIALS }}"
         with:
