@@ -32,7 +32,7 @@ jobs:
           ls -al
 
       - name: Log in with Azure Action
-        uses: azure/actions/login@v1
+        uses: azure/login@v1
         env:
           CREDENTIALS: "${{ secrets.AZURE_CREDENTIALS }}"
         with:
@@ -44,6 +44,7 @@ jobs:
         run: |
           az account show
           az group list
+
       - name: Run a multi-line script
         #if condition can be used to make commands run regardless of status of prev steps
         if: always()
