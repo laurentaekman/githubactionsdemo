@@ -30,11 +30,9 @@ jobs:
       - name: running a custom script
         run: |
           ls -al
-      - name: upgrade az
-        run: az upgrade
 
       - name: Log in with Azure Action
-        uses: azure/login@v1
+        uses: azure/actions/login@v1
         with:
           creds: "${{ secrets.AZURE_CREDENTIALS }}"
       # Need JSON object secret with: clientId, clientSecret, subscriptionId, tenantId
