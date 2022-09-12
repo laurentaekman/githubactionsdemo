@@ -33,6 +33,8 @@ jobs:
 
       - name: Log in with Azure Action
         uses: azure/login@v1
+        env:
+          CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
         with:
           creds: ${{ env.CREDENTIALS }}
           allow-no-subscriptions: true
