@@ -48,7 +48,7 @@ jobs:
           resource-group: githubactionsdemo
 
       - run: |
-          kubectl create namespace github_actions_demo
+          kubectl create namespace github-actions-demo
 
       # Runs a set of commands using the runners shell
       - name: Run AZ Command
