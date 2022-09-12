@@ -39,6 +39,12 @@ jobs:
           creds: ${{ env.CREDENTIALS }}
       # Need JSON object secret with: clientId, clientSecret, subscriptionId, tenantId
 
+      - uses: azure/aks-set-context@v1
+        with:
+          creds: ${{ env.CREDENTIALS }}
+          cluster-name: githubactionsdemo
+          resource-group: githubactionsdemo
+
       # Runs a set of commands using the runners shell
       - name: Run AZ Command
         run: |
@@ -54,18 +60,23 @@ jobs:
 
       - name: check java version
         run: java -version
+
       - name: gradle build
         run: gradle build
+
       - name: docker version
         run: |
           docker -v
           docker
           docker images -a
+
       - name: docker build
         run: |
           docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin2.0
           docker images -a
+
       - name: docker login
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
       - name: docker image push
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin2.0
