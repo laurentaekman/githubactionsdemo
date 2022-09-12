@@ -34,7 +34,7 @@ jobs:
       - name: Log in with Azure Action
         uses: azure/login@v1
         env:
-          CREDENTIALS: "${{ secrets.AZURE_CREDENTIALS }}"
+          CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
         with:
           creds: ${{ env.CREDENTIALS }}
       # Need JSON object secret with: clientId, clientSecret, subscriptionId, tenantId
