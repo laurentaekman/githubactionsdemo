@@ -34,7 +34,7 @@ jobs:
       - name: Log in with Azure Action
         uses: azure/login@v1
         with:
-          credentials: "${{ secrets.AZURE_CREDENTIALS }}"
+          creds: "${{ secrets.AZURE_CREDENTIALS }}"
       # Need JSON object secret with: clientId, clientSecret, subscriptionId, tenantId
 
       # Runs a set of commands using the runners shell
