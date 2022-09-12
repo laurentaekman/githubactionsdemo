@@ -40,6 +40,8 @@ jobs:
       # Need JSON object secret with: clientId, clientSecret, subscriptionId, tenantId
 
       - uses: azure/aks-set-context@v1
+        env:
+          CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
         with:
           creds: ${{ env.CREDENTIALS }}
           cluster-name: githubactionsdemo
