@@ -47,6 +47,9 @@ jobs:
           cluster-name: githubactionsdemo
           resource-group: githubactionsdemo
 
+      - run: |
+          kubectl create namespace github_actions_demo
+
       # Runs a set of commands using the runners shell
       - name: Run AZ Command
         run: |
