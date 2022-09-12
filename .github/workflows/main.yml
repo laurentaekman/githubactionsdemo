@@ -32,9 +32,11 @@ jobs:
           ls -al
 
       - name: Log in with Azure Action
-        uses: azure/actions/login@v1
+        uses: azure/login@v1
+        env:
+          CREDENTIALS: "${{ secrets.AZURE_CREDENTIALS }}"
         with:
-          creds: "${{ secrets.AZURE_CREDENTIALS }}"
+          creds: ${{ env.CREDENTIALS }}
       # Need JSON object secret with: clientId, clientSecret, subscriptionId, tenantId
 
       # Runs a set of commands using the runners shell
