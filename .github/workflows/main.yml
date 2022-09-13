@@ -8,6 +8,9 @@ on:
   push:
     branches: ["main", "feature/branch"]
 
+env:
+  DOCKER_TAG: ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin/${GITHUB_SHA::8}
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -43,11 +46,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      # - name: Docker Image Tag
-      #   env:
-      #     IMAGE_TAG: ${{ github.sha }}
-      #   run: |
-      #     docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin/${GITHUB_SHA::8}
+      - name: Docker Image Tag
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build . -t $DOCKER_TAG
 
       # docker push ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin/${GITHUB_SHA::8}
       # - name: docker login
@@ -61,7 +64,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin/${GITHUB_SHA::8}
+          tags: $DOCKER_TAG
 
       - name: running a custom script
         run: |
