@@ -43,11 +43,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Docker Image Tag
-        env:
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin/${GITHUB_SHA::8}
+      # - name: Docker Image Tag
+      #   env:
+      #     IMAGE_TAG: ${{ github.sha }}
+      #   run: |
+      #     docker build . -t ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin/${GITHUB_SHA::8}
 
       # docker push ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin/${GITHUB_SHA::8}
       # - name: docker login
@@ -58,8 +58,6 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v3
-        env:
-          IMAGE_TAG: ${{ github.sha }}
         with:
           context: .
           push: true
