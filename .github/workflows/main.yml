@@ -50,7 +50,7 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build . -t $DOCKER_TAG
+          docker build . -t ${{DOCKER_TAG}}
 
       # docker push ${{ secrets.DOCKERHUB_USERNAME }}/demo-kotlin/${GITHUB_SHA::8}
       # - name: docker login
@@ -64,7 +64,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: $DOCKER_TAG
+          tags: ${{DOCKER_TAG}}
 
       - name: running a custom script
         run: |
