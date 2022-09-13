@@ -33,6 +33,8 @@ jobs:
         run: ls -al
 
   build-the-image-and-push:
+    needs:
+      - build
     runs-on: ubuntu-latest
     steps:
       - name: gradle build
