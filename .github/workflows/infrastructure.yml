@@ -24,26 +24,48 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: "Install Terraform"
-        run: |
-          curl -SL "https://releases.hashicorp.com/terraform/1.2.9/terraform_1.2.9_linux_amd64.zip" --output terraform.zip
-          unzip terraform.zip
-          mv terraform /usr/local/bin
-          terraform --version
-          rm terraform.zip
+      # - name: "Install Terraform"
+      #   run: |
+      #     curl -SL "https://releases.hashicorp.com/terraform/1.2.9/terraform_1.2.9_linux_amd64.zip" --output terraform.zip
+      #     unzip terraform.zip
+      #     mv terraform /usr/local/bin
+      #     terraform --version
+      #     rm terraform.zip
 
-      - name: "Install TFLint"
-        run: |
-          wget "https://github.com/terraform-linters/tflint/releases/download/v0.40.0/tflint_linux_amd64.zip"
-          unzip tflint_linux_amd64.zip
-          mv tflint /usr/local/bin
-          rm tflint_linux_amd64.zip
+      # - name: "Install TFLint"
+      #   run: |
+      #     wget "https://github.com/terraform-linters/tflint/releases/download/v0.40.0/tflint_linux_amd64.zip"
+      #     unzip tflint_linux_amd64.zip
+      #     mv tflint /usr/local/bin
+      #     rm tflint_linux_amd64.zip
 
-      - name: "Terraform init"
-        run: terraform init
+      # - name: "Terraform init"
+      #   run: terraform init
 
-      - name: Terraform plan
-        run: terraform plan
+      # - name: Terraform plan
+      #   run: terraform plan
 
-      - name: Terraform apply
-        run: terraform apply -auto-approve
+      # - name: Terraform apply
+      #   run: terraform apply -auto-approve
+
+      - name: 'Terraform Format'
+          uses: hashicorp/terraform-github-actions@master
+          with: 
+            tf_actions_version: 0.14.8
+            tf_actions_subcommand: 'fmt'
+            tf_actions_working_dir: './terraform'
+
+      - name: 'Terraform Init'
+          uses: hashicorp/terraform-github-actions@master
+          with: 
+            tf_actions_version: 0.14.8
+            tf_actions_subcommand: 'init'
+            tf_actions_working_dir: './terraform'
+
+      - name: Terraform Plan
+          uses: hashicorp/terraform-github-actions@master
+          with: 
+            tf_actions_version: 0.14.8
+            tf_actions_subcommand: 'plan'
+            tf_actions_working_dir: './terraform'
+
