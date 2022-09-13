@@ -1,34 +1,34 @@
 terraform {
-    required_version = ">=0.12"
-    required_providers {
-        azurerm = {
-            source = "hashicorp/azurerm"
-            version = ">=2.0"
-        }
+  required_version = ">=0.12"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">=2.0"
     }
+  }
 }
 
 provider "azurerm" {
-    features {}
+  features {}
 }
 
 variable "rg_prefix" {
-    default = "rg"
+  default = "rg"
 }
 
 variable "location" {
-    default = "eastus"
+  default = "eastus"
 }
 
 resource "random_pet" "gh-actions-resource" {
-    prefix = var.rg_prefix
+  prefix = var.rg_prefix
 }
 
 resource "azurerm_resource_group" "gh-actions-resource-group" {
-    location = var.location
-    name = random_pet.gh-actions-resource.id
+  location = var.location
+  name     = random_pet.gh-actions-resource.id
 }
 
 output "resource_group_location" {
-    value = azurerm_resource_group.gh-actions-resource-group.name
+  value = azurerm_resource_group.gh-actions-resource-group.name
 }
