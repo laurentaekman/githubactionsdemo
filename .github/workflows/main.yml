@@ -27,6 +27,8 @@ jobs:
         run: echo Hello, world!
 
   get-the-files:
+    needs:
+      - starting-up
     runs-on: ubuntu-latest
     steps:
       - name: Run a custom script
@@ -35,8 +37,10 @@ jobs:
   build-the-image-and-push:
     needs:
       - starting-up
+      - get-the-files
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: gradle build
         run: gradle build
 
