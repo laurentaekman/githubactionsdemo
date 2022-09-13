@@ -34,7 +34,7 @@ jobs:
 
   build-the-image-and-push:
     needs:
-      - build
+      - starting-up
     runs-on: ubuntu-latest
     steps:
       - name: gradle build
