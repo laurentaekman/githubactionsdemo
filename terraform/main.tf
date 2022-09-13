@@ -29,6 +29,11 @@ resource "azurerm_resource_group" "gh-actions-resource-group" {
   name     = random_pet.gh-actions-resource.id
 }
 
+resource "azurerm_resource_group" "gh-actions-resource-group1" {
+  location = "north europe"
+  name     = "createdviapipeline"
+}
+
 output "resource_group_location" {
   value = azurerm_resource_group.gh-actions-resource-group.name
 }
